@@ -1,0 +1,486 @@
+```html
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎂 Happy Birthday!</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:linear-gradient(135deg,#ff9a9e,#fad0c4,#a18cd1);
+    color:white;
+    overflow-x:hidden;
+}
+
+/* INTRO */
+.intro{
+    position:fixed;
+    inset:0;
+    background:linear-gradient(135deg,#ff758c,#ff7eb3,#8e7dff);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    z-index:99999;
+    transition:1s;
+}
+
+.intro-box{
+    padding:40px;
+}
+
+.intro h1{
+    font-size:clamp(45px,9vw,90px);
+    margin-bottom:20px;
+    animation:pop 1.5s ease;
+}
+
+.intro p{
+    font-size:20px;
+    margin-bottom:30px;
+}
+
+.start-btn{
+    padding:17px 35px;
+    border:none;
+    border-radius:50px;
+    background:white;
+    color:#e84393;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+    box-shadow:0 10px 30px rgba(0,0,0,.25);
+    transition:.3s;
+}
+
+.start-btn:hover{
+    transform:scale(1.1);
+}
+
+/* HERO */
+.hero{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:30px;
+}
+
+.hero h1{
+    font-size:clamp(40px,8vw,85px);
+    text-shadow:0 5px 25px rgba(0,0,0,.25);
+    animation:pop 1.5s ease;
+}
+
+.hero p{
+    max-width:750px;
+    margin-top:25px;
+    font-size:22px;
+    line-height:1.7;
+}
+
+/* MESSAGE */
+.message{
+    padding:100px 20px;
+    text-align:center;
+}
+
+.message-box{
+    max-width:850px;
+    margin:auto;
+    padding:50px 35px;
+    border-radius:30px;
+    background:rgba(255,255,255,.18);
+    backdrop-filter:blur(15px);
+    box-shadow:0 15px 50px rgba(0,0,0,.2);
+    animation:fadeUp 1s ease;
+}
+
+.message-box h2{
+    font-size:42px;
+    margin-bottom:30px;
+}
+
+.message-box p{
+    font-size:20px;
+    line-height:2;
+}
+
+/* GALLERY */
+.gallery{
+    padding:80px 5%;
+    background:rgba(255,255,255,.08);
+}
+
+.gallery h2{
+    text-align:center;
+    font-size:42px;
+    margin-bottom:45px;
+}
+
+.photos{
+    max-width:1300px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:20px;
+}
+
+.photo{
+    width:100%;
+    aspect-ratio:1/1;
+    object-fit:cover;
+    border-radius:22px;
+    box-shadow:0 10px 25px rgba(0,0,0,.25);
+    transition:.4s;
+    animation:fadeUp 1s ease;
+}
+
+.photo:hover{
+    transform:scale(1.07) rotate(2deg);
+    box-shadow:0 20px 40px rgba(0,0,0,.35);
+}
+
+/* FOOTER */
+footer{
+    padding:35px;
+    text-align:center;
+    background:rgba(0,0,0,.15);
+    font-size:17px;
+}
+
+/* FLOATING EFFECT */
+.effect{
+    position:fixed;
+    bottom:-50px;
+    pointer-events:none;
+    z-index:9998;
+    animation:floatUp linear forwards;
+}
+
+@keyframes floatUp{
+    0%{
+        transform:translateY(0) rotate(0deg);
+        opacity:1;
+    }
+    100%{
+        transform:translateY(-110vh) rotate(360deg);
+        opacity:0;
+    }
+}
+
+@keyframes pop{
+    0%{
+        transform:scale(0);
+        opacity:0;
+    }
+    70%{
+        transform:scale(1.15);
+    }
+    100%{
+        transform:scale(1);
+        opacity:1;
+    }
+}
+
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(40px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@media(max-width:600px){
+
+    .photos{
+        grid-template-columns:repeat(2,1fr);
+        gap:10px;
+    }
+
+    .gallery h2{
+        font-size:30px;
+    }
+
+    .message-box{
+        padding:30px 20px;
+    }
+
+    .message-box h2{
+        font-size:30px;
+    }
+
+    .message-box p{
+        font-size:17px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- INTRO -->
+<div class="intro" id="intro">
+
+    <div class="intro-box">
+
+        <h1>💌 Нууц мэндчилгээ</h1>
+
+        <p>
+            Чамд зориулсан жижигхэн сюрприз байна... 🎂✨
+        </p>
+
+        <button class="start-btn" onclick="startBirthday()">
+            🎁 Нээх
+        </button>
+
+    </div>
+
+</div>
+
+<!-- MUSIC -->
+<audio id="music" loop>
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<!-- HERO -->
+<section class="hero">
+
+    <h1>🎂 Төрсөн өдрийн мэнд хүргэе! 🎉</h1>
+
+    <p>
+        Өнөөдөр бол чиний хамгийн онцгой өдөр. ❤️
+        <br><br>
+        Үргэлж инээж, аз жаргалтай байгаарай! ✨
+    </p>
+
+</section>
+
+<!-- MESSAGE -->
+<section class="message">
+
+    <div class="message-box">
+
+        <h2>💌 ЖЭЭдээ зориуллаа</h2>
+
+        <p>
+            ЖЭЭдээ төрсөн өдрийн мэнд хүргэе! 🎂❤️
+
+            <br><br>
+
+            Чамтай хамт өнгөрүүлсэн
+            бүх мөч, инээд хөөр,
+            хөгжилтэй дурсамжууд
+            үнэхээр үнэ цэнтэй.
+
+            <br><br>
+
+            Шинэ насанд чинь
+            аз жаргал,
+            эрүүл энх,
+            инээд хөөр,
+            амжилт бүтээл
+            үргэлж хамт байг. ✨
+
+            <br><br>
+
+            Хүссэн бүхэн чинь биелж,
+            өдөр бүр инээмсэглэж,
+            гоё дурсамжаар дүүрэн
+            байгаарай. ❤️
+
+            <br><br>
+
+            <strong>
+                HAPPY BIRTHDAY! JEE🎉🎂❤️
+            </strong>
+        </p>
+
+    </div>
+
+</section>
+
+<!-- GALLERY -->
+<section class="gallery">
+
+    <h2>📸 Бидний дурсамжууд</h2>
+
+    <div class="photos">
+
+        <img src="images/1.jpg" class="photo">
+        <img src="images/2.jpg" class="photo">
+        <img src="images/3.jpg" class="photo">
+        <img src="images/4.jpg" class="photo">
+        <img src="images/5.jpg" class="photo">
+        <img src="images/6.jpg" class="photo">
+        <img src="images/7.jpg" class="photo">
+        <img src="images/8.jpg" class="photo">
+        <img src="images/9.jpg" class="photo">
+        <img src="images/10.jpg" class="photo">
+
+        <img src="images/11.jpg" class="photo">
+        <img src="images/12.jpg" class="photo">
+        <img src="images/13.jpg" class="photo">
+        <img src="images/14.jpg" class="photo">
+        <img src="images/15.jpg" class="photo">
+        <img src="images/16.jpg" class="photo">
+        <img src="images/17.jpg" class="photo">
+        <img src="images/18.jpg" class="photo">
+        <img src="images/19.jpg" class="photo">
+        <img src="images/20.jpg" class="photo">
+
+        <img src="images/21.jpg" class="photo">
+        <img src="images/22.jpg" class="photo">
+        <img src="images/23.jpg" class="photo">
+        <img src="images/24.jpg" class="photo">
+        <img src="images/25.jpg" class="photo">
+        <img src="images/26.jpg" class="photo">
+        <img src="images/27.jpg" class="photo">
+        <img src="images/28.jpg" class="photo">
+        <img src="images/29.jpg" class="photo">
+        <img src="images/30.jpg" class="photo">
+
+        <img src="images/31.jpg" class="photo">
+        <img src="images/32.jpg" class="photo">
+        <img src="images/33.jpg" class="photo">
+        <img src="images/34.jpg" class="photo">
+        <img src="images/35.jpg" class="photo">
+        <img src="images/36.jpg" class="photo">
+        <img src="images/37.jpg" class="photo">
+        <img src="images/38.jpg" class="photo">
+        <img src="images/39.jpg" class="photo">
+        <img src="images/40.jpg" class="photo">
+
+        <img src="images/41.jpg" class="photo">
+        <img src="images/42.jpg" class="photo">
+        <img src="images/43.jpg" class="photo">
+        <img src="images/44.jpg" class="photo">
+        <img src="images/45.jpg" class="photo">
+        <img src="images/46.jpg" class="photo">
+        <img src="images/47.jpg" class="photo">
+        <img src="images/48.jpg" class="photo">
+        <img src="images/49.jpg" class="photo">
+        <img src="images/50.jpg" class="photo">
+
+        <img src="images/51.jpg" class="photo">
+        <img src="images/52.jpg" class="photo">
+        <img src="images/53.jpg" class="photo">
+        <img src="images/54.jpg" class="photo">
+        <img src="images/55.jpg" class="photo">
+        <img src="images/56.jpg" class="photo">
+        <img src="images/57.jpg" class="photo">
+        <img src="images/58.jpg" class="photo">
+        <img src="images/59.jpg" class="photo">
+        <img src="images/60.jpg" class="photo">
+
+    </div>
+
+</section>
+
+<footer>
+    Made with ❤️ just for you 🎂
+</footer>
+
+<script>
+
+const music = document.getElementById("music");
+
+function startBirthday(){
+
+    // Мэндчилгээний цонхыг алга болгоно
+    const intro = document.getElementById("intro");
+
+    intro.style.opacity = "0";
+
+    setTimeout(function(){
+        intro.style.display = "none";
+    },1000);
+
+    // НЭЭХ товч дармагц дуу эхэлнэ
+    music.volume = 0.7;
+
+    music.play().catch(function(error){
+        console.log("Music error:",error);
+    });
+
+    // Animation
+    createManyEffects();
+
+}
+
+// Floating effect
+function createEffect(){
+
+    const effect = document.createElement("div");
+
+    effect.className = "effect";
+
+    const items = [
+        "❤️",
+        "💖",
+        "💕",
+        "💗",
+        "✨",
+        "🎈",
+        "🎉",
+        "🥳"
+    ];
+
+    effect.innerHTML =
+        items[Math.floor(Math.random()*items.length)];
+
+    effect.style.left =
+        Math.random()*100+"vw";
+
+    effect.style.fontSize =
+        20 + Math.random()*35 + "px";
+
+    effect.style.animationDuration =
+        4 + Math.random()*5 + "s";
+
+    document.body.appendChild(effect);
+
+    setTimeout(function(){
+        effect.remove();
+    },10000);
+}
+
+// Нээх үед олон animation
+function createManyEffects(){
+
+    for(let i=0;i<35;i++){
+
+        setTimeout(function(){
+            createEffect();
+        },i*100);
+
+    }
+}
+
+// Дараа нь байнга animation явна
+setInterval(function(){
+    createEffect();
+},700);
+
+</script>
+
+</body>
+</html>
+```
